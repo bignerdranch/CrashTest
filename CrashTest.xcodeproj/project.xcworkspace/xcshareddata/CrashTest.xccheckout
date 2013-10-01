@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B70D626B-459D-41F7-B73D-837DB21E90AB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CrashTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CC344940-1E1F-4315-AE8A-6102BEA115FB</key>
+		<string>https://github.com/jblocksom/CrashTest.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CrashTest.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CC344940-1E1F-4315-AE8A-6102BEA115FB</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jblocksom/CrashTest.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CC344940-1E1F-4315-AE8A-6102BEA115FB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CC344940-1E1F-4315-AE8A-6102BEA115FB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CrashTest</string>
+		</dict>
+	</array>
+</dict>
+</plist>
