@@ -35,12 +35,14 @@
 @property (weak, nonatomic) IBOutlet UISlider *resistance1Slider;
 @property (weak, nonatomic) IBOutlet UISlider *density1Slider;
 @property (weak, nonatomic) IBOutlet UISwitch *rotation1Switch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *pushMode1Control;
 
 @property (weak, nonatomic) IBOutlet UISlider *elasticity2Slider;
 @property (weak, nonatomic) IBOutlet UISlider *friction2Slider;
 @property (weak, nonatomic) IBOutlet UISlider *resistance2Slider;
 @property (weak, nonatomic) IBOutlet UISlider *density2Slider;
 @property (weak, nonatomic) IBOutlet UISwitch *rotation2Switch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *pushMode2Control;
 
 @property (nonatomic, assign) CGRect startRect1;
 @property (nonatomic, assign) CGRect startRect2;
@@ -65,7 +67,6 @@
     collider.collisionMode = UICollisionBehaviorModeItems;
     [self.animator addBehavior:collider];
 
-    
     self.startRect1 = self.item1.frame;
     self.startRect2 = self.item2.frame;
 }
@@ -79,12 +80,12 @@
 - (IBAction)startCrash:(id)sender
 {
     // Add an quick push to the views
-    UIPushBehavior *push1 = [[UIPushBehavior alloc] initWithItems:@[self.item1] mode:UIPushBehaviorModeInstantaneous];
+    UIPushBehavior *push1 = [[UIPushBehavior alloc] initWithItems:@[self.item1] mode:self.pushMode1Control.selectedSegmentIndex == 0 ? UIPushBehaviorModeInstantaneous : UIPushBehaviorModeContinuous];
     push1.angle = 0.0;
     push1.magnitude = 3.0;
     [self.animator addBehavior:push1];
     
-    UIPushBehavior *push2 = [[UIPushBehavior alloc] initWithItems:@[self.item2] mode:UIPushBehaviorModeInstantaneous];
+    UIPushBehavior *push2 = [[UIPushBehavior alloc] initWithItems:@[self.item2] mode:self.pushMode2Control.selectedSegmentIndex == 0 ? UIPushBehaviorModeInstantaneous : UIPushBehaviorModeContinuous];
     push2.angle = M_PI;
     push2.magnitude = 3.0;
     [self.animator addBehavior:push2];
