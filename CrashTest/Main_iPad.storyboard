@@ -199,6 +199,36 @@
                                 <color key="tintColor" red="0.20000001788139343" green="0.66666668653488159" blue="0.86274516582489014" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="onTintColor" red="0.20000001789999999" green="0.66666668650000005" blue="0.86274516580000005" alpha="1" colorSpace="deviceRGB"/>
                             </switch>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="7Qf-Gj-fUy">
+                                <rect key="frame" x="48" y="444" width="199" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Instantaneous"/>
+                                    <segment title="Constant"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A3Z-m7-1lY">
+                                <rect key="frame" x="255" y="446" width="88" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="ry6-fh-o9Y">
+                                <rect key="frame" x="777" y="444" width="199" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Instantaneous"/>
+                                    <segment title="Constant"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dpi-v1-pC9">
+                                <rect key="frame" x="681" y="449" width="88" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -213,6 +243,8 @@
                         <outlet property="friction2Slider" destination="usy-da-VRr" id="DCL-Ao-ppE"/>
                         <outlet property="item1" destination="bkS-r5-s0X" id="CBg-rA-dNT"/>
                         <outlet property="item2" destination="eRD-x4-2B4" id="m43-Wb-Re7"/>
+                        <outlet property="pushMode1Control" destination="7Qf-Gj-fUy" id="jy8-76-5ZG"/>
+                        <outlet property="pushMode2Control" destination="ry6-fh-o9Y" id="GrG-Oz-0Bk"/>
                         <outlet property="resistance1Slider" destination="ym6-zZ-cjK" id="MSS-as-Wdi"/>
                         <outlet property="resistance2Slider" destination="u0g-VA-fDv" id="N12-3X-abu"/>
                         <outlet property="rotation1Switch" destination="2fG-2u-dm4" id="xUI-BP-qdK"/>

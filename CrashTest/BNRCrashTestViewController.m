@@ -30,20 +30,25 @@
 @property (weak, nonatomic) IBOutlet UIView *item1;
 @property (weak, nonatomic) IBOutlet UIView *item2;
 
-@property (strong, nonatomic) IBOutlet UISlider *elasticity1Slider;
-@property (strong, nonatomic) IBOutlet UISlider *friction1Slider;
-@property (strong, nonatomic) IBOutlet UISlider *resistance1Slider;
-@property (strong, nonatomic) IBOutlet UISlider *density1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *elasticity1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *friction1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *resistance1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *density1Slider;
 @property (weak, nonatomic) IBOutlet UISwitch *rotation1Switch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *pushMode1Control;
 
 @property (weak, nonatomic) IBOutlet UISlider *elasticity2Slider;
 @property (weak, nonatomic) IBOutlet UISlider *friction2Slider;
 @property (weak, nonatomic) IBOutlet UISlider *resistance2Slider;
 @property (weak, nonatomic) IBOutlet UISlider *density2Slider;
 @property (weak, nonatomic) IBOutlet UISwitch *rotation2Switch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *pushMode2Control;
 
 @property (nonatomic, assign) CGRect startRect1;
 @property (nonatomic, assign) CGRect startRect2;
+
+@property (nonatomic, strong) UIPushBehavior *push1;
+@property (nonatomic, strong) UIPushBehavior *push2;
 
 @end
 
@@ -65,7 +70,6 @@
     collider.collisionMode = UICollisionBehaviorModeItems;
     [self.animator addBehavior:collider];
 
-    
     self.startRect1 = self.item1.frame;
     self.startRect2 = self.item2.frame;
 }
@@ -78,20 +82,20 @@
 
 - (IBAction)startCrash:(id)sender
 {
-    NSLog(@"start", self.item1, self.item2);
     // Add an quick push to the views
-    UIPushBehavior *push1 = [[UIPushBehavior alloc] initWithItems:@[self.item1] mode:UIPushBehaviorModeInstantaneous];
-    push1.angle = 0.0;
-    push1.magnitude = 3.0;
-    [self.animator addBehavior:push1];
+    self.push1 = [[UIPushBehavior alloc] initWithItems:@[self.item1] mode:self.pushMode1Control.selectedSegmentIndex == 0 ? UIPushBehaviorModeInstantaneous : UIPushBehaviorModeContinuous];
+    self.push1.angle = 0.0;
+    self.push1.magnitude = 3.0;
+    [self.animator addBehavior:self.push1];
     
-    UIPushBehavior *push2 = [[UIPushBehavior alloc] initWithItems:@[self.item2] mode:UIPushBehaviorModeInstantaneous];
-    push2.angle = M_PI;
-    push2.magnitude = 3.0;
-    [self.animator addBehavior:push2];
+    self.push2 = [[UIPushBehavior alloc] initWithItems:@[self.item2] mode:self.pushMode2Control.selectedSegmentIndex == 0 ? UIPushBehaviorModeInstantaneous : UIPushBehaviorModeContinuous];
+    self.push2.angle = M_PI;
+    self.push2.magnitude = 3.0;
+    [self.animator addBehavior:self.push2];
 }
 
-- (IBAction)updateDIBs:(id)sender {
+- (IBAction)updateDIBs:(id)sender
+{
     self.item1DIB.resistance = self.resistance1Slider.value;
     self.item1DIB.elasticity = self.elasticity1Slider.value;
     self.item1DIB.friction = self.friction1Slider.value;
@@ -105,13 +109,15 @@
     self.item2DIB.allowsRotation = self.rotation2Switch.isOn;
 }
 
-- (IBAction)reset:(id)sender {
+- (IBAction)reset:(id)sender
+{
+    [self.animator removeBehavior:self.push1];
+    [self.animator removeBehavior:self.push2];
     
     self.item1.frame = self.startRect1;
     self.item1.transform = CGAffineTransformIdentity;
     CGPoint vel = [self.item1DIB linearVelocityForItem:self.item1];
     [self.item1DIB addLinearVelocity:CGPointMake(-vel.x, -vel.y) forItem:self.item1];
-
     [self.animator updateItemUsingCurrentState:self.item1];
     
     self.item2.frame = self.startRect2;
