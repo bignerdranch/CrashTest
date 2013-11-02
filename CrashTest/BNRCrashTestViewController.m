@@ -47,6 +47,9 @@
 @property (nonatomic, assign) CGRect startRect1;
 @property (nonatomic, assign) CGRect startRect2;
 
+@property (nonatomic, strong) UIPushBehavior *push1;
+@property (nonatomic, strong) UIPushBehavior *push2;
+
 @end
 
 @implementation BNRCrashTestViewController
@@ -80,15 +83,15 @@
 - (IBAction)startCrash:(id)sender
 {
     // Add an quick push to the views
-    UIPushBehavior *push1 = [[UIPushBehavior alloc] initWithItems:@[self.item1] mode:self.pushMode1Control.selectedSegmentIndex == 0 ? UIPushBehaviorModeInstantaneous : UIPushBehaviorModeContinuous];
-    push1.angle = 0.0;
-    push1.magnitude = 3.0;
-    [self.animator addBehavior:push1];
+    self.push1 = [[UIPushBehavior alloc] initWithItems:@[self.item1] mode:self.pushMode1Control.selectedSegmentIndex == 0 ? UIPushBehaviorModeInstantaneous : UIPushBehaviorModeContinuous];
+    self.push1.angle = 0.0;
+    self.push1.magnitude = 3.0;
+    [self.animator addBehavior:self.push1];
     
-    UIPushBehavior *push2 = [[UIPushBehavior alloc] initWithItems:@[self.item2] mode:self.pushMode2Control.selectedSegmentIndex == 0 ? UIPushBehaviorModeInstantaneous : UIPushBehaviorModeContinuous];
-    push2.angle = M_PI;
-    push2.magnitude = 3.0;
-    [self.animator addBehavior:push2];
+    self.push2 = [[UIPushBehavior alloc] initWithItems:@[self.item2] mode:self.pushMode2Control.selectedSegmentIndex == 0 ? UIPushBehaviorModeInstantaneous : UIPushBehaviorModeContinuous];
+    self.push2.angle = M_PI;
+    self.push2.magnitude = 3.0;
+    [self.animator addBehavior:self.push2];
 }
 
 - (IBAction)updateDIBs:(id)sender
@@ -108,6 +111,9 @@
 
 - (IBAction)reset:(id)sender
 {
+    [self.animator removeBehavior:self.push1];
+    [self.animator removeBehavior:self.push2];
+    
     self.item1.frame = self.startRect1;
     self.item1.transform = CGAffineTransformIdentity;
     CGPoint vel = [self.item1DIB linearVelocityForItem:self.item1];
