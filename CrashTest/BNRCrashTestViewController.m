@@ -90,7 +90,8 @@
     [self.animator addBehavior:push2];
 }
 
-- (IBAction)updateDIBs:(id)sender {
+- (IBAction)updateDIBs:(id)sender
+{
     self.item1DIB.resistance = self.resistance1Slider.value;
     self.item1DIB.elasticity = self.elasticity1Slider.value;
     self.item1DIB.friction = self.friction1Slider.value;
@@ -104,13 +105,12 @@
     self.item2DIB.allowsRotation = self.rotation2Switch.isOn;
 }
 
-- (IBAction)reset:(id)sender {
-    
+- (IBAction)reset:(id)sender
+{
     self.item1.frame = self.startRect1;
     self.item1.transform = CGAffineTransformIdentity;
     CGPoint vel = [self.item1DIB linearVelocityForItem:self.item1];
     [self.item1DIB addLinearVelocity:CGPointMake(-vel.x, -vel.y) forItem:self.item1];
-
     [self.animator updateItemUsingCurrentState:self.item1];
     
     self.item2.frame = self.startRect2;
