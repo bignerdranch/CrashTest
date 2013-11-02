@@ -78,7 +78,6 @@
 
 - (IBAction)startCrash:(id)sender
 {
-    NSLog(@"start", self.item1, self.item2);
     // Add an quick push to the views
     UIPushBehavior *push1 = [[UIPushBehavior alloc] initWithItems:@[self.item1] mode:UIPushBehaviorModeInstantaneous];
     push1.angle = 0.0;
