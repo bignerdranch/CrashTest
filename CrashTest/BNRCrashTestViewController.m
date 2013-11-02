@@ -30,10 +30,10 @@
 @property (weak, nonatomic) IBOutlet UIView *item1;
 @property (weak, nonatomic) IBOutlet UIView *item2;
 
-@property (strong, nonatomic) IBOutlet UISlider *elasticity1Slider;
-@property (strong, nonatomic) IBOutlet UISlider *friction1Slider;
-@property (strong, nonatomic) IBOutlet UISlider *resistance1Slider;
-@property (strong, nonatomic) IBOutlet UISlider *density1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *elasticity1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *friction1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *resistance1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *density1Slider;
 @property (weak, nonatomic) IBOutlet UISwitch *rotation1Switch;
 
 @property (weak, nonatomic) IBOutlet UISlider *elasticity2Slider;
