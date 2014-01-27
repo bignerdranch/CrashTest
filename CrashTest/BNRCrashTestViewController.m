@@ -45,6 +45,8 @@
 @property (nonatomic, assign) CGRect startRect1;
 @property (nonatomic, assign) CGRect startRect2;
 
+@property (nonatomic, strong) NSMutableDictionary *panStartLocationForViews;
+
 @end
 
 @implementation BNRCrashTestViewController
@@ -64,10 +66,45 @@
     UICollisionBehavior *collider = [[UICollisionBehavior alloc] initWithItems:@[self.item1, self.item2]];
     collider.collisionMode = UICollisionBehaviorModeItems;
     [self.animator addBehavior:collider];
-
     
     self.startRect1 = self.item1.frame;
     self.startRect2 = self.item2.frame;
+    
+    self.panStartLocationForViews = [[NSMutableDictionary alloc] init];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    UIPanGestureRecognizer *gr = [[UIPanGestureRecognizer alloc]
+                                  initWithTarget:self
+                                  action:@selector(pan:)];
+    [self.item1 addGestureRecognizer:gr];
+    
+    UIPanGestureRecognizer *gr2 = [[UIPanGestureRecognizer alloc]
+                                  initWithTarget:self
+                                  action:@selector(pan:)];
+    [self.item2 addGestureRecognizer:gr2];
+}
+
+- (void)pan:(UIGestureRecognizer *)gr
+{
+    UIPanGestureRecognizer *panGR = (UIPanGestureRecognizer *)gr;
+    
+    NSNumber *viewHash = [NSNumber numberWithUnsignedInteger:[gr.view hash]];
+    if (gr.state == UIGestureRecognizerStateBegan) {
+        self.panStartLocationForViews[viewHash] = [NSValue valueWithCGPoint:gr.view.center];
+    } else if (gr.state == UIGestureRecognizerStateEnded) {
+        [self.panStartLocationForViews removeObjectForKey:viewHash];
+    } else {
+        CGPoint delta = [panGR translationInView:self.view];
+        
+        CGPoint newPt = [self.panStartLocationForViews[viewHash] CGPointValue];
+        newPt.x += delta.x;
+        newPt.y += delta.y;
+        gr.view.center = newPt;
+        [self.animator updateItemUsingCurrentState:gr.view];
+        NSLog(@"Panning %@ to %@", gr.view, NSStringFromCGPoint(delta));
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,7 +115,6 @@
 
 - (IBAction)startCrash:(id)sender
 {
-    NSLog(@"start", self.item1, self.item2);
     // Add an quick push to the views
     UIPushBehavior *push1 = [[UIPushBehavior alloc] initWithItems:@[self.item1] mode:UIPushBehaviorModeInstantaneous];
     push1.angle = 0.0;
